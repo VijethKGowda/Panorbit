@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-import { BrowserRouter as Router, Route, HashRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, HashRouter, Switch } from "react-router-dom";
 
 import Landing from './pages/landing'
 import Profile from './pages/profile';
@@ -11,12 +11,14 @@ const App = () => {
     <HashRouter>
       <div className='font-pan'>
         <Router>
-          <Route exact path='/'>
-            <Landing />
-          </Route>
-          <Route path='/profile/'>
-            <Profile />
-          </Route>
+          <Switch>
+            <Route exact path='/'>
+              <Landing />
+            </Route>
+            <Route path='/profile/:id'>
+              <Profile />
+            </Route>
+          </Switch>
         </Router>
       </div>
     </HashRouter>
