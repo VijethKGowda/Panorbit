@@ -8,7 +8,7 @@ import Profile from './pages/profile';
 
 const App = () => {
   return (
-    <div>
+    <div className='font-pan'>
       <Router>
         <Route exact path='/'>
           <Landing />

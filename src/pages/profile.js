@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { users } from '../data/users.json'
 import { Link } from 'react-router-dom'
 import Chat from '../Components/chat/chat'
+import Check from '../Components/svg/check'
 
 const Profile = () => {
   let url = window.location.pathname
@@ -11,6 +12,10 @@ const Profile = () => {
   const [comp, setComp] = useState([])
   // const [geo, setGeo] = useState([]) lat given value is wrong
   const [profile, setProfile] = useState(true)
+  const [post, setPost] = useState(false)
+  const [gallery, setGallery] = useState(false)
+  const [todo, setTodo] = useState(false)
+
   const [sideMenu, setSideMenu] = useState(false)
 
   const id1 = Math.floor(Math.random() * users.length)
@@ -34,57 +39,61 @@ const Profile = () => {
       <div className="w-full flex flex-row justify-between">
         <div className="flex content-center flex-wrap h-screen rounded-rd w-20 md:w-48 lg:w-64 bg-gradient-to-b from-a to-c text-base md:text-lg lg:text-xl">
 
-          <div className="w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
-              onClick={e => { setProfile(true) }}
+              onClick={e => { setProfile(true), setTodo(false), setPost(false), setGallery(false) }}
             >
               Profile
             </button>
+              {profile ? <Check /> : null}
           </div>
 
-          <span className="w-full mx-2 md:mx-6 lg:mx-10 border border-gray-500" />
+          <span className="w-full mx-2 md:mx-6 lg:mx-10 border-t border-gray-500" />
 
-          <div className="w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
-              onClick={e => { setProfile(false) }}
+              onClick={e => { setProfile(false), setTodo(false), setPost(true), setGallery(false) }}
             >
               Post
             </button>
+              {post ? <Check /> : null}
           </div>
 
-          <span className="w-full mx-2 md:mx-6 lg:mx-10 border border-gray-500" />
+          <span className="w-full mx-2 md:mx-6 lg:mx-10 border-t border-gray-500" />
 
-          <div className="w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
-              onClick={e => { setProfile(false) }}
+              onClick={e => { setProfile(false), setTodo(false), setPost(false), setGallery(true) }}
             >
               Gallery
             </button>
+              {gallery ? <Check /> : null}
           </div>
 
-          <span className="w-full mx-2 md:mx-6 lg:mx-10 border border-gray-500" />
+          <span className="w-full mx-2 md:mx-6 lg:mx-10 border-t border-gray-500" />
 
-          <div className="w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
-              onClick={e => { setProfile(false) }}
+              onClick={e => { setProfile(false), setTodo(true), setPost(false), setGallery(false) }}
             >
               ToDo
             </button>
+              {todo ? <Check /> : null}
           </div>
 
         </div>
 
         <div className="w-3/4">
 
-          <div className="flex flex-row justify-between py-3 px-3 font-semibold text-gray-700 border-b-2 border-gray-500">
+          <div className="flex flex-row justify-between py-3 px-3 font-semibold text-gray-700 border-b border-gray-500">
             <div className="text-xl">
               Profile
             </div>
@@ -256,7 +265,7 @@ const Profile = () => {
                     <span className="text-gray-700 col-span-6">{addr.zipcode}</span>
                   </p>
 
-                  <div className="w-128 pt-5 rounded-rd mx-auto">
+                  <div className="w-144 pt-5 rounded-rd mx-auto">
                     <iframe className="w-full h-80 rounded-rd"
                       src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31128.357252322105!2d75.37257292628105!3d12.77561193416516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1599593904087!5m2!1sen!2sin"
                       width="600"

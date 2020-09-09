@@ -5,7 +5,6 @@ module.exports = {
         'primary': '#319795',
         'secondary': '#2c7a7b',
         'a': '#2C65C8',
-        'b': '#702CC8',
         'c': '#5e3bc8'
       },
       spacing: {
@@ -40,6 +39,9 @@ module.exports = {
       borderRadius: {
         'rd': '19px',
       },
+      fontFamily: {
+        'pan': ['system-ui']
+              }
     },
   },
   variants: {
