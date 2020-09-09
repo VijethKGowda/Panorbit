@@ -142,7 +142,7 @@ const Chat = () => {
                             </span>
                           </div>
 
-                          <div className={`text-white px-2 py-2 text-center transition ease-in-out duration-700 transform rotate-180`}>
+                          <div className={`text-white px-2 py-3 text-center transition ease-in-out duration-700 transform rotate-180`}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -165,7 +165,7 @@ const Chat = () => {
 
                 {/*Display message */}
                 <ScrollToBottom className='h-56 w-64 overflow-y-auto bg-gray-200' style={{ 'scrollSnapAlign': 'end' }}>
-                  
+
                   <div className='grid grid-cols-1 gap-1 place-items-start text-left'>
                     <div className="py-1 w-4/5 px-2 bg-gray-400 my-1 rounded-md">
                       hi,
