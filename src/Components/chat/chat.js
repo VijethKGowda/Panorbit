@@ -17,7 +17,6 @@ const Chat = () => {
     }
   }
 
-  console.log(send)
 
   return (
     <>

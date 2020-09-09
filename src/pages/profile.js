@@ -265,7 +265,7 @@ const Profile = () => {
                     <span className="text-gray-700 col-span-6">{addr.zipcode}</span>
                   </p>
 
-                  <div className="w-144 pt-5 rounded-rd mx-auto">
+                  {/* <div className="w-144 pt-5 rounded-rd mx-auto">
                     <iframe className="w-full h-80 rounded-rd"
                       src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31128.357252322105!2d75.37257292628105!3d12.77561193416516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1599593904087!5m2!1sen!2sin"
                       width="600"
@@ -273,7 +273,7 @@ const Profile = () => {
                       frameBorder="0"
                       allowFullScreen=""
                       aria-hidden="false" tabIndex="0"></iframe>
-                  </div>
+                  </div> */}
                 </div>
 
               </div>

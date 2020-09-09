@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import Wave from '../Components/waves/wave'
 
 const Landing = () => {
-  console.log(users)
 
   return (
     <>
