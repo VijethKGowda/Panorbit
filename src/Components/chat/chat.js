@@ -112,7 +112,7 @@ const Chat = () => {
           {
             chatUser && (
 
-              <motion.form
+              <motion.div
                 className="flex flex-col bg-white w-64 rounded-lg"
                 initial="collapsed"
                 animate="open"
@@ -195,7 +195,7 @@ const Chat = () => {
                 </ScrollToBottom>
 
                 {/* typing */}
-                <div className='h-10 w-64 p-1 flex flex-row justify-between'>
+                <form className='h-10 w-64 p-1 flex flex-row justify-between'>
                   <input
                     className="border-gray-600 border h-full w-4/5 focus:border-a focus:outline-none rounded-md px-3 py-1"
                     type='text'
@@ -221,9 +221,9 @@ const Chat = () => {
                       <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                     </svg>
                   </button>
-                </div>
+                </form>
 
-              </motion.form>
+              </motion.div>
             )
           }
         </AnimatePresence>

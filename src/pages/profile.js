@@ -18,8 +18,53 @@ const Profile = () => {
 
   const [sideMenu, setSideMenu] = useState(false)
 
-  const id1 = Math.floor(Math.random() * users.length)
-  const id2 = Math.floor(Math.random() * users.length)
+  const [showModel, setShowModel] = useState(false)
+  const [addUser, setAddUser] = useState([id])
+  const [id1, setId1] = useState()
+  
+// add user model
+  const Model = () => {
+    return (
+      <>
+        <div className="absolute grid place-items-center top-0 bg-gray-600 w-full h-screen bg-opacity-50 p-56">
+          <div className="absolute w-1/2 h-auto bg-white">
+            <button
+              style={{ 'border': 'none', 'outline': 'none' }}
+              className="text-gray-700 text-lg font-semibold w-full text-right px-4 py-3"
+              onClick={e => { setShowModel(false) }}
+            >X</button>
+
+            <form className='grid place-items-center w-full h-full'>
+              <input
+                className="border-gray-600 border h-full w-4/5 mx-auto focus:border-a focus:outline-none rounded-md px-3 py-1"
+                type='text'
+                placeholder="Enter your ID"
+                value={id1}
+                onChange={e => setId1(e.target.value)}
+              ></input>
+              <button
+                style={{ 'border': 'none', 'outline': 'none', 'background': '#d55151' }}
+                className="text-white py-2 px-2 my-3 w-32 mx-auto rounded-rd font-semibold text-center"
+                onClick={
+                  e => {
+                    e.preventDefault()
+                    setAddUser([
+                      ...addUser, parseInt(id1)
+                    ]),
+                      setShowModel(false),
+                      setId1('')
+                  }
+                }
+              >ADD</button>
+            </form>
+          </div>
+
+        </div>
+      </>
+    )
+  }
+
+
 
   useEffect(() => {
     users.map((user) => {
@@ -35,11 +80,13 @@ const Profile = () => {
 
 
   return (
-    <div className="p-12">
+    <div className="px-12 py-4">
       <div className="w-full flex flex-row justify-between">
-        <div className="flex content-center flex-wrap h-screen rounded-rd w-20 md:w-48 lg:w-64 bg-gradient-to-b from-a to-c text-base md:text-lg lg:text-xl">
 
-          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+        {/* sideMenu */}
+        <div className="flex content-center flex-wrap rounded-rd w-20 md:w-48 lg:w-64 bg-gradient-to-b from-a to-c text-base md:text-lg lg:text-xl">
+
+          <div className="flex flex-row w-full ml-2 md:ml-6 lg:ml-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
@@ -47,12 +94,12 @@ const Profile = () => {
             >
               Profile
             </button>
-              {profile ? <Check /> : null}
+            {profile ? <Check /> : null}
           </div>
 
           <span className="w-full mx-2 md:mx-6 lg:mx-10 border-t border-gray-500" />
 
-          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+          <div className="flex flex-row w-full ml-2 md:ml-6 lg:ml-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
@@ -60,12 +107,12 @@ const Profile = () => {
             >
               Post
             </button>
-              {post ? <Check /> : null}
+            {post ? <Check /> : null}
           </div>
 
           <span className="w-full mx-2 md:mx-6 lg:mx-10 border-t border-gray-500" />
 
-          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+          <div className="flex flex-row w-full ml-2 md:ml-6 lg:ml-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
@@ -73,12 +120,12 @@ const Profile = () => {
             >
               Gallery
             </button>
-              {gallery ? <Check /> : null}
+            {gallery ? <Check /> : null}
           </div>
 
           <span className="w-full mx-2 md:mx-6 lg:mx-10 border-t border-gray-500" />
 
-          <div className="flex flex-row w-full mx-2 md:mx-6 lg:mx-10 my-3 text-gray-500">
+          <div className="flex flex-row w-full ml-2 md:ml-6 lg:ml-10 my-3 text-gray-500">
             <button
               style={{ 'border': 'none', 'outline': 'none' }}
               className="active:text-white hover:text-white focus:text-white w-full text-center md:text-left"
@@ -86,7 +133,7 @@ const Profile = () => {
             >
               ToDo
             </button>
-              {todo ? <Check /> : null}
+            {todo ? <Check /> : null}
           </div>
 
         </div>
@@ -109,6 +156,8 @@ const Profile = () => {
 
           </div>
 
+
+
           {
             sideMenu ?
 
@@ -126,111 +175,112 @@ const Profile = () => {
                   </div>
 
                   {
-                    users.map(userSide => {
-                      if (id1 == userSide.id) return (
-                        <>
-                          <span className='border-t border-gray-500 '></span>
-                          <button
-                            style={{ 'border': 'none', 'outline': 'none' }}
-                            className="flex flex-row justify-center text-centerpt-3 my-3"
-                            onClick={e => {
-                              setId(userSide.id),
-                                window.history.pushState("", "", `/profile/${userSide.id}`)
-                            }}
-                          >
-                            <img src={userSide.profilepicture} className="w-10 h-10 object-cover object-center rounded-full inline-block" alt="pic" />
-                            <span className="font-medium text-gray-700 py-2 px-2">{userSide.name}</span>
-                          </button>
-                        </>
-                      )
-                      if (id2 == userSide.id) return (
-                        <>
-                          <span className='border-t border-gray-500 '></span>
-                          <button
-                            style={{ 'border': 'none', 'outline': 'none' }}
-                            className="flex flex-row justify-center text-centerpt-3 my-3"
-                            onClick={e => {
-                              setId(userSide.id),
-                                window.history.pushState("", "", `/profile/${userSide.id}`)
-                            }}
-                          >
-                            <img src={userSide.profilepicture} className="w-10 h-10 object-cover object-center rounded-full inline-block" alt="pic" />
-                            <span className="font-medium text-gray-700 py-2 px-2">{userSide.name}</span>
-                          </button>
-                        </>
+                    users.map((userSide, index) => {
+                      return (
+                        <div key={index}>
+                          {
+                            addUser.map((adder, index) => {
+                              if (adder == userSide.id) return (
+                                <div key={index}>
+                                  <span className='border-t border-gray-500 '></span>
+                                  <button
+                                    style={{ 'border': 'none', 'outline': 'none' }}
+                                    className="flex flex-row justify-center text-centerpt-3 my-3"
+                                    onClick={e => {
+                                      setId(userSide.id),
+                                        window.history.pushState("", "", `/profile/${userSide.id}`)
+                                    }}
+                                  >
+                                    <img src={userSide.profilepicture} className="w-10 h-10 object-cover object-center rounded-full inline-block" alt="pic" />
+                                    <span className="font-medium text-gray-700 py-2 px-2">{userSide.name}</span>
+                                  </button>
+                                </div>
+                              )
+                            })
+                          }
+                        </div>
                       )
                     })
                   }
+
+                  <button
+                    className="text-white py-2 px-2 my-3 w-32 mx-auto rounded-rd font-semibold text-center bg-gray-600"
+                    onClick={e => { setShowModel(true) }}
+                  >
+                    + Add user
+                  </button>
 
                   <Link to='/'
                     style={{ 'border': 'none', 'outline': 'none', 'background': '#d55151' }}
                     className="text-white py-2 px-2 my-3 w-32 mx-auto rounded-rd font-semibold text-center">
                     Sign out
-              </Link>
+                  </Link>
 
                 </div>
               </div>
               : null
           }
 
+
+
           {
             profile ?
-              <div className="flex flex-col md:flex-col lg:flex-row justify-center sm:justify-center lg:justify-between text-lg font-medium">
+              <div className="flex flex-col md:flex-col lg:flex-row justify-center sm:justify-center lg:justify-between text-lg">
 
                 <div className="w-72 flex flex-col justify-items-center text-center py-6 mx-auto sm:mx-auto md:mx-auto lg:mx-0">
                   <p className="py-2">
                     <img src={useDetail.profilepicture} className="w-48 h-48 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" alt="pic"></img>
                   </p>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">Name</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{useDetail.name}</span>
+                    <span className="text-gray-800 col-span-6">{useDetail.name}</span>
                   </p>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">Username</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{useDetail.username}</span>
+                    <span className="text-gray-800 col-span-6">{useDetail.username}</span>
                   </p>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">email</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{useDetail.email}</span>
+                    <span className="text-gray-800 col-span-6">{useDetail.email}</span>
                   </p>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">Phone</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{useDetail.phone}</span>
+                    <span className="text-gray-800 col-span-6">{useDetail.phone}</span>
                   </p>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">Website</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{useDetail.website}</span>
+                    <span className="text-gray-800 col-span-6">{useDetail.website}</span>
                   </p>
 
-                  <span className="border-b-2"></span>
-                  <span className="text-gray-600">Company</span>
+                  <span className="border-b border-gray-500 pt-1"></span>
+                  <span className="text-gray-600 py-1">Company</span>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">Name</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{comp.name}</span>
+                    <span className="text-gray-800 col-span-6">{comp.name}</span>
                   </p>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">Catchphrase</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{comp.catchPhrase}</span>
+                    <span className="text-gray-800 col-span-6">{comp.catchPhrase}</span>
                   </p>
 
-                  <p className="py-2 grid grid-cols-12 gap-2">
+                  <p className="pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-5">bs</span>
                     <span> : </span>
-                    <span className="text-gray-700 col-span-6">{comp.bs}</span>
+                    <span className="text-gray-800 col-span-6">{comp.bs}</span>
                   </p>
 
                 </div>
@@ -241,28 +291,28 @@ const Profile = () => {
                   <p className="-mr-6 text-gray-600 py-2">Address :</p>
 
 
-                  <p className="-mr-6 text-gray-600 py-2 grid grid-cols-12 gap-2">
+                  <p className="-mr-6 text-gray-600 pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-3">Street</span>
                     <span>:</span>
-                    <span className="text-gray-700 col-span-6">{addr.street}</span>
+                    <span className="text-gray-800 col-span-6">{addr.street}</span>
                   </p>
 
-                  <p className="-mr-6 text-gray-600 py-2 grid grid-cols-12 gap-2">
+                  <p className="-mr-6 text-gray-600 pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-3">Suite</span>
                     <span>:</span>
-                    <span className="text-gray-700 col-span-6">{addr.suite}</span>
+                    <span className="text-gray-800 col-span-6">{addr.suite}</span>
                   </p>
 
-                  <p className="-mr-6 text-gray-600 py-2 grid grid-cols-12 gap-2">
+                  <p className="-mr-6 text-gray-600 pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-3">City</span>
                     <span>:</span>
-                    <span className="text-gray-700 col-span-6">{addr.city}</span>
+                    <span className="text-gray-800 col-span-6">{addr.city}</span>
                   </p>
 
-                  <p className="-mr-6 text-gray-600 py-2 grid grid-cols-12 gap-2">
+                  <p className="-mr-6 text-gray-600 pt-1 grid grid-cols-12 gap-0">
                     <span className="text-gray-600 col-span-3">ZipCode</span>
                     <span>:</span>
-                    <span className="text-gray-700 col-span-6">{addr.zipcode}</span>
+                    <span className="text-gray-800 col-span-6">{addr.zipcode}</span>
                   </p>
 
                   <div className="w-128 pt-5 rounded-rd mx-auto">
@@ -279,7 +329,7 @@ const Profile = () => {
               </div>
               :
 
-              <div className='text-6xl font-black text-gray-300 text-center w-full'>
+              <div className='text-6xl font-black text-gray-300 text-center w-full h-screen'>
                 Coming Soon
               </div>
 
@@ -288,6 +338,12 @@ const Profile = () => {
         </div>
       </div>
       <Chat />
+
+      {
+        showModel ?
+          <Model /> : null
+      }
+
     </div>
   )
 }

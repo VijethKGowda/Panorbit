@@ -3,6 +3,8 @@ import { users } from '../data/users.json'
 import { Link } from 'react-router-dom'
 import Wave from '../Components/waves/wave'
 
+import './scroll.css'
+
 const Landing = () => {
 
   return (
@@ -29,7 +31,6 @@ const Landing = () => {
 
         </div>
       </div>
-      <div className='wave'></div>
     </>
   )
 }
