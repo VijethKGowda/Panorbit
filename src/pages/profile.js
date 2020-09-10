@@ -35,6 +35,7 @@ const Profile = () => {
             >X</button>
 
             <form className='grid place-items-center w-full h-full'>
+              <label className="py-1 text-gray-600">ID is number from 1-10</label>
               <input
                 className="border-gray-600 border h-full w-4/5 mx-auto focus:border-a focus:outline-none rounded-md px-3 py-1"
                 type='text'
