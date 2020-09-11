@@ -8,6 +8,7 @@ const Chat = () => {
   const [chatUser, setChatUser] = useState(null)
   const [text, setText] = useState('')
   const [send, setSend] = useState([])
+  const [users, setUsers] = useState([])
 
   let url = 'https://panorbit.in/api/users.json';
 
