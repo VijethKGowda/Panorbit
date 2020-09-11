@@ -30,7 +30,6 @@ const Profile = () => {
     fetch(url)
       .then(response => response.json())
       .then((res) => {
-        console.log(res.users)
         setUsers(res.users)
       })
       .catch(err => { console.log(err) });
@@ -338,7 +337,7 @@ const Profile = () => {
                   <div className="w-128 pt-5 rounded-rd mx-auto">
                     <iframe 
                     className="w-full h-72" 
-                    frameborder="0" 
+                    frameBorder="0" 
                     marginHeight="0" marginWidth="0" 
                     title="map" scrolling="no" 
                     src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"></iframe>

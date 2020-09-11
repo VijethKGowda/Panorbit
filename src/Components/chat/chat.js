@@ -16,7 +16,6 @@ const Chat = () => {
     fetch(url)
       .then(response => response.json())
       .then((res) => {
-        console.log(res.users)
         setUsers(res.users)
       })
       .catch(err => { console.log(err) });
@@ -192,7 +191,7 @@ const Chat = () => {
                     {
                       send.map((sent, index) => {
                         return (
-                          <div className="py-1 w-4/5 px-2 bg-gray-400 my-1 rounded-md">
+                          <div key={index} className="py-1 w-4/5 px-2 bg-gray-400 my-1 rounded-md">
                             {sent}
                           </div>
                         )
