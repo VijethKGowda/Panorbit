@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { users } from '../data/users.json'
 import { Link } from 'react-router-dom'
 import Chat from '../Components/chat/chat'
 import Check from '../Components/svg/check'
 
 const Profile = () => {
-  let url = window.location.pathname
-  const [id, setId] = useState(url.replace('/profile/', ''))
+  let tabUrl = window.location.pathname
+  const [id, setId] = useState(tabUrl.replace('/profile/', ''))
   const [useDetail, setUserDetail] = useState([])
   const [addr, setAddr] = useState([])
   const [comp, setComp] = useState([])
@@ -21,8 +20,28 @@ const Profile = () => {
   const [showModel, setShowModel] = useState(false)
   const [addUser, setAddUser] = useState([id])
   const [id1, setId1] = useState()
-  
-// add user model
+
+  const [users, setUsers] = useState([])
+
+  // fetch user
+  let url = 'https://panorbit.in/api/users.json';
+
+  const userList = () => {
+    fetch(url)
+      .then(response => response.json())
+      .then((res) => {
+        console.log(res.users)
+        setUsers(res.users)
+      })
+      .catch(err => { console.log(err) });
+  }
+
+
+  useEffect(() => {
+    userList()
+  }, [])
+
+  // add user model
   const Model = () => {
     return (
       <>
@@ -317,13 +336,13 @@ const Profile = () => {
                   </p>
 
                   <div className="w-128 pt-5 rounded-rd mx-auto">
-                    <iframe className="w-full h-80 rounded-rd"
-                      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31128.357252322105!2d75.37257292628105!3d12.77561193416516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1599593904087!5m2!1sen!2sin"
-                      width="600"
-                      height="450"
-                      frameBorder="0"
-                      allowFullScreen=""
-                      aria-hidden="false" tabIndex="0"></iframe>
+                    <iframe 
+                    className="w-full h-72" 
+                    frameborder="0" 
+                    marginHeight="0" marginWidth="0" 
+                    title="map" scrolling="no" 
+                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"></iframe>
+
                   </div>
                 </div>
 

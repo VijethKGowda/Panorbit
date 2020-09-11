@@ -1,22 +1,30 @@
-import React, { useState } from 'react'
-import { users } from '../../data/users.json'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion";
-import ScrollToBottom from 'react-scroll-to-bottom';
 
 const Chat = () => {
-  let url = window.location.pathname
-  const [id, setId] = useState(url.replace('/profile/', ''))
+  let tabUrl = window.location.pathname
+  const [id, setId] = useState(tabUrl.replace('/profile/', ''))
   const [showChat, setShowChat] = useState(false)
   const [chatUser, setChatUser] = useState(null)
   const [text, setText] = useState('')
   const [send, setSend] = useState([])
 
-  function clearArray() {
-    while (send.length) {
-      send.pop();
-    }
+  let url = 'https://panorbit.in/api/users.json';
+
+  const userList = () => {
+    fetch(url)
+      .then(response => response.json())
+      .then((res) => {
+        console.log(res.users)
+        setUsers(res.users)
+      })
+      .catch(err => { console.log(err) });
   }
 
+
+  useEffect(() => {
+    userList()
+  },[])
 
   return (
     <>
@@ -25,7 +33,7 @@ const Chat = () => {
         <button
           className="w-full flex flex-row justify-between px-3 py-2"
           style={{ 'border': 'none', 'outline': 'none' }}
-          onClick={e => { setShowChat(!showChat), clearArray }}
+          onClick={e => { setShowChat(!showChat) }}
         >
           <div className={`flex flex-row px-2 py-2`}>
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +93,7 @@ const Chat = () => {
                           <button
                             key={user.id}
                             className="flex flex-row px-3 w-full"
-                            onClick={e => { setChatUser(user.id), clearArray }}
+                            onClick={e => { setChatUser(user.id) }}
                           >
                             <img src={user.profilepicture} className="w-8 h-8 my-1 object-cover object-center rounded-full inline-block" alt="pic"></img>
                             <div className="mx-2 my-1 py-1 text-base text-gray-700">
@@ -132,7 +140,7 @@ const Chat = () => {
                           key={user.id}
                           className="w-full flex flex-row justify-between px-3 bg-a text-center rounded-t-lg"
                           style={{ 'border': 'none', 'outline': 'none' }}
-                          onClick={e => { setChatUser(null), e.preventDefault(), clearArray }}
+                          onClick={e => { setChatUser(null), e.preventDefault() }}
                         >
                           <div className={`flex flex-row px-2 py-2 text-center`}>
                             <img src={user.profilepicture} className="w-8 h-8 my-1 object-cover object-center rounded-full inline-block" alt="pic"></img>
@@ -141,7 +149,7 @@ const Chat = () => {
                             </span>
                           </div>
 
-                          <div className={`text-white px-2 py-3 text-center transition ease-in-out duration-700 transform rotate-180`}>
+                          <div className={`text-white px-2 py-2 text-center transition ease-in-out duration-700 transform rotate-180`}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -163,8 +171,7 @@ const Chat = () => {
                 }
 
                 {/*Display message */}
-                <ScrollToBottom className='h-56 w-64 overflow-y-auto bg-gray-200' style={{ 'scrollSnapAlign': 'end' }}>
-
+                <div className='h-56 w-64 overflow-y-auto bg-gray-200'>
                   <div className='grid grid-cols-1 gap-1 place-items-start text-left'>
                     <div className="py-1 w-4/5 px-2 bg-gray-400 my-1 rounded-md">
                       hi,
@@ -184,7 +191,7 @@ const Chat = () => {
                     {
                       send.map((sent, index) => {
                         return (
-                          <div key={index} className="py-1 w-4/5 px-2 bg-gray-400 my-1 rounded-md">
+                          <div className="py-1 w-4/5 px-2 bg-gray-400 my-1 rounded-md">
                             {sent}
                           </div>
                         )
@@ -192,7 +199,7 @@ const Chat = () => {
                     }
                   </div>
 
-                </ScrollToBottom>
+                </div>
 
                 {/* typing */}
                 <form className='h-10 w-64 p-1 flex flex-row justify-between'>
