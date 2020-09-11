@@ -334,7 +334,7 @@ const Profile = () => {
                     <span className="text-gray-800 col-span-6">{addr.zipcode}</span>
                   </p>
 
-                  <div className="w-128 pt-5 rounded-rd mx-auto">
+                  <div className="w-96 lg:w-128 py-5 rounded-rd mx-auto">
                     <iframe 
                     className="w-full h-72" 
                     frameBorder="0" 
